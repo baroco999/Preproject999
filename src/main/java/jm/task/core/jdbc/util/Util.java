@@ -4,10 +4,11 @@ import java.sql.*;
 
 public class Util {
 
+    public static final String URL = "jdbc:mysql://localhost:3306/mybase";
+    public static final String USER_NAME = "root";
+    public static final String PASSWORD = "root";
+
     public static Connection toMySql() throws SQLException {
-        String url = "jdbc:mysql://localhost:3306/mybase";
-        String username = "root";
-        String password = "ьгышсф1979";
-        return  DriverManager.getConnection(url, username, password);
+        return  DriverManager.getConnection(URL, USER_NAME, PASSWORD);
     }
 }

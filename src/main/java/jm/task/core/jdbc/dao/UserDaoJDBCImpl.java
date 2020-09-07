@@ -16,8 +16,7 @@ public class UserDaoJDBCImpl implements UserDao {
     public void createUsersTable() {
         try(Connection conn = Util.toMySql();
             Statement st = conn.createStatement()) {
-            String query = "CREATE TABLE IF NOT EXISTS users (id INT PRIMARY KEY AUTO_INCREMENT, name VARCHAR(25), lastName VARCHAR(25), age SMALLINT CHECK(Age >0 AND Age < 100))";
-            st.executeUpdate(query);
+            st.executeUpdate("CREATE TABLE IF NOT EXISTS users (id INT PRIMARY KEY AUTO_INCREMENT, name VARCHAR(25), lastName VARCHAR(25), age SMALLINT CHECK(Age >0 AND Age < 100))");
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -34,8 +33,7 @@ public class UserDaoJDBCImpl implements UserDao {
 
     public void saveUser(String name, String lastName, byte age) {
         try(Connection conn = Util.toMySql()) {
-            String query = "INSERT INTO users (name, lastName, age) VALUES (?, ?, ?)";
-            PreparedStatement pst = conn.prepareStatement(query);
+            PreparedStatement pst = conn.prepareStatement("INSERT INTO users (name, lastName, age) VALUES (?, ?, ?)");
             pst.setString(1, name);
             pst.setString(2, lastName);
             pst.setByte(3, age);
@@ -48,8 +46,7 @@ public class UserDaoJDBCImpl implements UserDao {
 
     public void removeUserById(long id) {
         try(Connection conn = Util.toMySql()) {
-            String query = "DELETE FROM users WHERE id = ?";
-            PreparedStatement pst = conn.prepareStatement(query);
+            PreparedStatement pst = conn.prepareStatement("DELETE FROM users WHERE id = ?");
             pst.setLong(1, id);
             pst.executeUpdate();
         } catch (SQLException e) {
